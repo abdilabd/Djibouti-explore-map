@@ -28,24 +28,6 @@
     display: flex; flex-direction: column;
   }
 
-  /* ── RECHERCHE FLOTTANTE ── */
-  .search-overlay { position: absolute; top: 16px; left: 16px; z-index: 1000; }
-  .search-wrap { position: relative; display: flex; align-items: center; }
-  .search-wrap svg { position: absolute; left: 10px; opacity: .5; pointer-events: none; }
-  #search {
-    background: rgba(10,10,10,.92);
-    border: 1px solid var(--gold-dim);
-    color: var(--text);
-    font-family: 'Crimson Text', serif;
-    font-size: 15px;
-    padding: 8px 14px 8px 36px;
-    width: 240px; outline: none;
-    transition: border-color .2s;
-    backdrop-filter: blur(6px);
-  }
-  #search:focus { border-color: var(--gold); }
-  #search::placeholder { color: var(--text-dim); }
-
   /* ── LAYOUT ── */
   .main { flex: 1; display: flex; overflow: hidden; }
   #map { flex: 1; background: #050505; min-width: 0; transition: flex .35s cubic-bezier(.4,0,.2,1); }
@@ -238,13 +220,6 @@
 <body>
 
 <div class="main">
-  <div class="search-overlay">
-    <div class="search-wrap">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="search" type="text" placeholder="Rechercher un site...">
-    </div>
-  </div>
-
   <div id="map"></div>
 
   <div id="panel">
@@ -479,7 +454,6 @@ function renderMarkers() {
   document.getElementById("count-total").textContent = allFeatures.length;
 }
 
-document.getElementById("search").addEventListener("input", e => { searchQuery = e.target.value; renderMarkers(); });
 map.on("click", (e) => { if (e.originalEvent.target.id === "map") { panel.classList.remove("open"); setTimeout(() => map.invalidateSize(), 360); } });
 
 // ── Chargement (inchangé) ──
